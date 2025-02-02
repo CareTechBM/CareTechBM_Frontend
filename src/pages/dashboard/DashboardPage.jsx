@@ -1,21 +1,14 @@
-import { useEffect } from "react";
-import { MyNavbar } from "../../components/navbars/Navbar";
-import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { Content } from "../../components/dashboard/Content";
-import { useProducts } from "../../shared/hooks/useProduct"
-
+import React from "react";
+import { MySidebar } from "../../components/sidebar/Sidebar.jsx";
 export const DashboardPage = () => {
-  const { getProducts, allProducts, isFetching } = useProducts();
-
-  if (isFetching) {
-    return <LoadingSpinner />;
-  }
-
   return (
-    <div className="dashboard-container">
-      <MyNavbar />
-      <div className="container mt-5">
-        <Content products={allProducts || []} getProducts={getProducts} />
+    <div className="dashboard-container d-flex">
+      {/* Sidebar fijo */}
+      <MySidebar />
+      
+      {/* Contenido principal */}
+      <div className="content-container flex-grow-1 p-4">
+        <h1>Bienvenido al Dashboard</h1>
       </div>
     </div>
   );
