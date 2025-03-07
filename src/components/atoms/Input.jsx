@@ -1,7 +1,7 @@
 export const Input = ({
     field,
-    label,
     value,
+    placeholder,
     onChangeHandler,
     type,
     showErrorMessage,
@@ -19,29 +19,29 @@ export const Input = ({
 
   return (
     <>
-        <div className="auth-form-label">
-            <span>{label}</span>
-        </div>
         {textarea ? (
             <textarea
                 type={type}
+                id={field}
                 value={value}
                 onChange={handleValueChange}
+                placeholder={placeholder}
                 onBlur={handleInputBlur}
                 rows={5}
                 style={{maxWidth: '400px'}}
+                className="input-group-text w-full justify-items-start"
             />
         ) : (
             <input
+                id={field}
                 type={type}
                 value={value}
                 onChange={handleValueChange}
+                placeholder={placeholder}
                 onBlur={handleInputBlur}
+                className="input-group-text w-full justify-items-start"
             />
-        )}
-        <span className="auth-form-validation-message">
-            {showErrorMessage && validationMessage}    
-        </span>    
+        )} 
     </>
   )
 }
