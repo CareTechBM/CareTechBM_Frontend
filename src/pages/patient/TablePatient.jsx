@@ -1,7 +1,7 @@
 import { HeaderTable } from '../../components/molecules/HeaderTable'
 import { ColumnTable } from '../../components/molecules/ColumnTable'
 
-export const TablePatient = ({ patient }) => {
+export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
     return (
         <>
             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
@@ -16,8 +16,8 @@ export const TablePatient = ({ patient }) => {
                             <ColumnTable dato={item.phone} />
                             <ColumnTable dato={item.email} />
                             <td className="grid grid-cols-1 p-2 gap-2">
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded">Editar</button>
-                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded">Eliminar</button>
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded" onClick={handleEdit} id={item._id}>Editar</button>
+                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded" onClick={handleDelete} id={item._id}>Eliminar</button>
                             </td>
                         </tr>
                     ))}

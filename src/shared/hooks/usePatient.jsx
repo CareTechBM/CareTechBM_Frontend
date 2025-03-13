@@ -59,7 +59,7 @@ export const usePatient = () => {
 
     const deletePatient =  async (id) => {
         setIsLoading(true);
-        const response = await deletePatientRequest({id});
+        const response = await deletePatientRequest(id);
 
         if (response.error) {
             toast.error(response.e?.response.data || 'Error al eliminar paciente');
@@ -68,7 +68,7 @@ export const usePatient = () => {
         }else{
             toast.success(response.data || 'Paciente eliminado exitosamente');
             setIsLoading(false);
-            return response.data
+            return response.data;
         }
     }
 
