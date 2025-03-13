@@ -1,9 +1,9 @@
 import { createPatient as createPatientRequest,
     getPatient as getPatientRequest,
-    updatePatient as updatePatientRequest
- } from '../../services/api.jsx';
+    updatePatient as updatePatientRequest,
+    deletePatient as deletePatientRequest
+} from '../../services/api.jsx';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 export const usePatient = () => {
@@ -57,5 +57,20 @@ export const usePatient = () => {
         }
     }
 
-    return{createPatient,getPatient, updatePatient, patient, isLoading};
+    const deletePatient =  async (id) => {
+        setIsLoading(true);
+        const response = await deletePatientRequest({id});
+
+        if (response.error) {
+            toast.error(response.e?.response.data || 'Error al eliminar paciente');
+            setIsLoading(false);
+            return ;
+        }else{
+            toast.success(response.data || 'Paciente eliminado exitosamente');
+            setIsLoading(false);
+            return response.data
+        }
+    }
+
+    return{createPatient, getPatient, updatePatient, deletePatient, patient, isLoading};
 }

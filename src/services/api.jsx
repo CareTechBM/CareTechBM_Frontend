@@ -62,9 +62,20 @@ export const getPatient= async ()=>{
     }
 }
 
-export const updatePatient = async (id, data)=>{
+export const updatePatient = async (data)=>{
     try {
         return await apiClient.put(`/patient/${data.id}`, data);
+    } catch (e) {
+        return {
+            error:true,
+            e
+        }
+    }
+}
+
+export const deletePatient = async (id)=>{
+    try {
+        return await apiClient.delete(`/patient/${id}`);
     } catch (e) {
         return {
             error:true,

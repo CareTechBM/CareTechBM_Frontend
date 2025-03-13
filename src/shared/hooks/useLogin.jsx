@@ -7,7 +7,6 @@ import { use } from 'react';
 export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    const [pacient, setPacient]= useState(null);
 
     const login = async (email, password) => {
         setIsLoading(true);
@@ -41,5 +40,5 @@ export const useLogin = () => {
         }
     }
 
-    return {login, register, pacient,isLoading};
+    return {login, register, isLoading};
 }
