@@ -1,7 +1,8 @@
-import {login as loginRequest} from '../../services/api';
+import {login as loginRequest, register as registerRequest} from '../../services/api';
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { use } from 'react';
 
 export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +21,25 @@ export const useLogin = () => {
             setIsLoading(false);
             navigate('/principal');
         }
-        return;
+        return ;
     }
 
-    return {login, isLoading};
+    const register = async(name, lastname, email, password, role)=>{
+        setIsLoading(true);
+        const response = await registerRequest({name, lastname, email, password, role});
+
+        if(response.error){
+            toast.error(response.e?.response.data || 'Error al registrar usuario');
+            setIsLoading(false);
+            return ;
+        }else{
+            toast.success(response.data.msg || 'Usuario registrado exitosamente');
+            setIsLoading(false);
+            navigate('/login');
+            return response.data;
+        }
+    }
+
+
+    return {login, register, isLoading};
 }

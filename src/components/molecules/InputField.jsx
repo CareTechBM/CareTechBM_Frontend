@@ -19,7 +19,7 @@ export const InputField = ({ field, label, value, onChangeHandler, type, showErr
                 textarea={textarea}
                 styles={stylesInput}
             />
-             <span className={`italic font-semibold text-lg `+ (showErrorMessage ? "text-red-500" : null)}> {showErrorMessage && validationMessage}</span>
+            <span className={`italic font-semibold text-lg `+ (showErrorMessage ? "text-red-500" : null)}> {showErrorMessage && validationMessage}</span>
         </div>
     )
 }
