@@ -1,5 +1,4 @@
-import React from "react";
-import { MySidebar } from "../../components/sidebar/Sidebar.jsx";
+import { MySidebar } from "../../components/organisms/Sidebar";
 export const DashboardPage = () => {
   return (
     <div className="dashboard-container d-flex">

@@ -101,6 +101,7 @@ export const LoginPage = () => {
                         showErrorMessage={formState.email.showError}
                         validationMessage={validateEmailMessage}
                         onBlurHandler={handleInputBlur}
+                        stylesLabel={'text-white'}
                     />
                     <InputField
                         field={formState.password.field}
@@ -112,8 +113,9 @@ export const LoginPage = () => {
                         showErrorMessage={formState.password.showError}
                         validationMessage={validateTextMessage}
                         onBlurHandler={handleInputBlur}
+                        stylesLabel={'text-white'}
                     />
-                    <button className="btn btn-primary"
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         disabled={btnDisabled} onClick={handleLogin}>Login</button>
                 </form>
             </div>
