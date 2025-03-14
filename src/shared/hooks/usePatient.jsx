@@ -36,7 +36,7 @@ export const usePatient = () => {
             return ;
         }else{
             toast.success('Pacientes obtenidos exitosamente');
-            setPatient(response.data);
+            setPatient(response.data.patient);
             setIsLoading(false);
             return response.data;
         }

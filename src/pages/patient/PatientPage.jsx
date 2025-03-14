@@ -11,6 +11,7 @@ export const PatientPage = () => {
 
   useEffect(() => {
     getPatients();
+    
   }, []);
 
   const handleDelete = async (e) => {
@@ -30,7 +31,7 @@ export const PatientPage = () => {
   return (
     <>
       <div className='bg-[#E6ECED] min-h-screen max-h-screen flex flex-col'>
-        <div className='p-4 relative overflow-x-auto shadow-md sm:rounded-lg bg-white dark:bg-gray-900 antialiased 
+        <div className='p-2 relative overflow-x-auto shadow-md sm:rounded-lg bg-white dark:bg-gray-900 antialiased 
         w-full mx-auto'>{
           Array.isArray(patient) ? (
             <TablePatient patient={patient} handleDelete={handleDelete} handleEdit={handleEdit}/>
