@@ -84,40 +84,6 @@ export const deletePatient = async (id)=>{
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const createDoctor = async (data)=>{
     try {
         return await apiClient.post('/doctor/', data);
@@ -161,3 +127,47 @@ export const deleteDoctor = async (id)=>{
         }
     }
 }   
+
+export const getMedication = async () => {
+    try {
+        return await apiClient.get('/medicine/view')
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const createMedication = async (data) => {
+    try {
+        return await apiClient.post('/medicine/create', data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const updateMedication = async (data) => {
+    try {
+        return await apiClient.put(`/medicine/update/${data.id}`, data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const deleteMedication = async (id) => {
+    try {
+        return await apiClient.delete(`/medicine/delete/${id}`)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}

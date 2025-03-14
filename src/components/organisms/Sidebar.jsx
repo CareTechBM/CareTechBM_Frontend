@@ -2,13 +2,16 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSuitcaseMedical } from '@fortawesome/free-solid-svg-icons';
 import { faHospitalUser } from "@fortawesome/free-solid-svg-icons";
+import { faUserMd } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import CareTechLogo from "../../assets/TechCare.png";
 import DoctorIcon from "../../assets/User Medical.png";
 
 
 const NavButton = ({ imgSrc, element, text, onClickHandler, extraClass }) => {
   return (
     <div className={"sidebar-button " + extraClass} onClick={onClickHandler}>
-      {imgSrc ? <img  src={imgSrc} alt={`${text} icon`} className="icon-image" /> : element}
+      {imgSrc ? <img src={imgSrc} alt={`${text} icon`} className="icon-image" /> : element}
       <span>{text}</span>
     </div>
   );
@@ -16,7 +19,7 @@ const NavButton = ({ imgSrc, element, text, onClickHandler, extraClass }) => {
 
 export const MySidebar = () => {
   const navigate = useNavigate();
-  
+
   const handleLogout = () => {
     alert("Logout realizado");
   };
@@ -26,9 +29,10 @@ export const MySidebar = () => {
   };
 
   return (
-    <div className="sidebar-container">
-      <div className="sidebar-logo">
-        <h2>Mi App</h2>
+    <div className="bg-[#E6ECED] min-h-screen flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
+      <div className=" filter:drop-shadow-xl sidebar-logo bg-[#2C3541] flex flex-col items-center justify-center">
+        <img src={CareTechLogo} alt="Logo" className="w-2/6" />
+        <h2 className="text-white">Care Tech</h2>
       </div>
       <div className="sidebar-buttons">
         <NavButton
@@ -38,10 +42,10 @@ export const MySidebar = () => {
           onClickHandler={() => navigate("/patient")}
         />
         <NavButton
-          extraClass={'justify-ritght items-center flex-row gap-2'}
+          extraClass={'justify-right items-center flex-row gap-2'}
           element={<FontAwesomeIcon size="xl" icon={faSuitcaseMedical} style={{ color: "#21a393", }} />}
           text="Medicamentos"
-          onClickHandler={() => navigate("/medicament")}
+          onClickHandler={() => navigate('/medication')}
         />
         <NavButton
           imgSrc={DoctorIcon}
@@ -49,14 +53,10 @@ export const MySidebar = () => {
           onClickHandler={() => navigate("/doctor")}
         />
         <NavButton
-          imgSrc="/assets/icons/settings.png"
-          text="My Account"
-          onClickHandler={() => { }}
-        />
-        <NavButton
-          imgSrc="/assets/icons/logout.png"
+          extraClass={'justify-right items-center flex-row gap-2'}
+          element={<FontAwesomeIcon size="xl" icon={faPowerOff} style={{ color: "#21a393", }} />}
           text="Logout"
-          onClickHandler={handleLogout}
+          onClickHandler={() => { }}
         />
       </div>
       <div className="sidebar-profile">

@@ -1,6 +1,7 @@
 import { MySidebar } from "../../components/organisms/Sidebar";
 import { PatientPage } from "../patient/PatientPage";
 import { DoctorPage } from "../doctor/DoctorPage";
+import {MedicationPage} from "../medication/MedicationPage";
 
 export const DashboardPage = ({ menu }) => {
   const viewMenu = () => {
@@ -9,6 +10,8 @@ export const DashboardPage = ({ menu }) => {
         return <PatientPage />;
       case 'doctor':
         return <DoctorPage />;
+      case 'medication':
+        return <MedicationPage />;
       default:
         return null;
     }
@@ -17,7 +20,7 @@ export const DashboardPage = ({ menu }) => {
   return (
     <div className="flex flex-row">
       {/* Sidebar fijo */}
-      <MySidebar />
+      <MySidebar/>
 
       {/* Contenido principal */}
       <div className="flex-grow-1 h-full">{viewMenu()}</div>

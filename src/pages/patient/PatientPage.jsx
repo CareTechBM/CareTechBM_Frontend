@@ -27,7 +27,7 @@ export const PatientPage = () => {
 
   return (
     <>
-      <div className='bg-[#E6ECED] min-h-screen max-h-screen flex flex-col'>
+      <div className='bg-[#21A393] min-h-screen max-h-screen flex flex-col'>
         <div className='p-2 relative overflow-x-auto shadow-md sm:rounded-lg bg-white dark:bg-gray-900 antialiased 
         w-full mx-auto'>{
           Array.isArray(patient) ? (

@@ -7,7 +7,7 @@ const routes = [
   { path: '/principal', element: <DashboardPage /> },
   { path: '/patient', element: <DashboardPage menu={'patient'} /> },
   { path: '/doctor', element: <DashboardPage menu={'doctor'} /> },
-  { path: '/medicament', element: <DashboardPage menu={'medicament'} /> },
+  { path: '/medication', element: <DashboardPage menu={'medication'} /> },
   { path: "/modal", element: <ModalComponent /> },
 ]
 
