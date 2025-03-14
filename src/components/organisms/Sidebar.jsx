@@ -13,19 +13,23 @@ export const MySidebar = () => {
   const navigate = useNavigate();
 
   const handleNavigateToSettingsPage = () => {
-    navigate('/patient');
+    navigate("/patient");
   };
 
   const handleNavigateToPublicacionesPage = () => {
-    navigate('/publicaciones');
+    navigate("/publicaciones");
   };
 
   const handleNavigateToAddPublicacionPage = () => {
-    navigate('/addpublicacion');
+    navigate("/addpublicacion");
   };
 
   const handleLogout = () => {
     alert("Logout realizado");
+  };
+
+  const handleOpenModal = () => {
+    navigate("/modal");
   };
 
   return (
@@ -37,7 +41,7 @@ export const MySidebar = () => {
         <NavButton
           imgSrc="/assets/icons/dashboard.png"
           text="Pacientes"
-          onClickHandler={() => navigate('/patient')}
+          onClickHandler={() => navigate("/patient")}
         />
         <NavButton
           imgSrc="/assets/icons/publicaciones.png"
@@ -61,7 +65,11 @@ export const MySidebar = () => {
         />
       </div>
       <div className="sidebar-profile">
-        <img src="https://via.placeholder.com/40" alt="Profile" className="profile-pic" />
+        <img
+          src="https://via.placeholder.com/40"
+          alt="Profile"
+          className="profile-pic"
+        />
         <div className="profile-details">
           <span>Emma Oliva</span>
           <span>em@gmail.com</span>
