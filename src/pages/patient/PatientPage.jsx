@@ -36,7 +36,7 @@ export const PatientPage = () => {
     <>
       <div className="min-h-screen max-h-screen flex flex-col bg-white">
         <div className="relative overflow-x-auto w-[auto]">
-          <div className="flex mx-[2rem] mt-[3%] gap-x-[3%]">
+          <div className="flex mx-[2rem] mt-[3%] gap-x-[2%]">
             <Typography
               variant="h1"
               sx={{

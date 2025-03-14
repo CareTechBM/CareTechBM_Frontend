@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { TextField } from "@mui/material";
+import FormPatient from "../forms/FormPatient";
 
 const style = {
   position: "absolute",
@@ -19,7 +20,11 @@ const style = {
 
 export default function ModalComponent() {
   const [open, setOpen] = React.useState(false);
+
+  // Abrir la modal
   const handleOpen = () => setOpen(true);
+
+  // Cerrar la modal
   const handleClose = () => setOpen(false);
 
   return (
@@ -33,28 +38,56 @@ export default function ModalComponent() {
       >
         Agregar Paciente
       </Button>
+
       <Modal
         keepMounted
         open={open}
-        onClose={handleClose}
+        onClose={(event, reason) => {
+          // Evita que la modal se cierre al hacer clic fuera o presionar Esc
+          if (reason === "backdropClick" || reason === "escapeKeyDown") {
+            return;
+          }
+          handleClose();
+        }}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
+        disableEscapeKeyDown
       >
         <Box sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Nuevo paciente
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: "2.5rem",
+              color: "#2c3541",
+              fontFamily: "'Montserrat', sans-serif",
+            }}
+          >
+            Datos de nuevo paciente
           </Typography>
-          <div className="w-auto h-auto">
-            <TextField
-              id="standard-basic"
-              label="Standard"
-              variant="standard"
-            />
-            <TextField
-              id="standard-basic"
-              label="Standard"
-              variant="standard"
-            />
+          <br />
+
+          <FormPatient />
+
+          <div className="w-[100%]">
+            <Button
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#bc4143",
+                color: "white",
+              }}
+            >
+              Cancelar
+            </Button>{" "}
+            <Button
+              onClick={""}
+              sx={{
+                backgroundColor: "#2C3541",
+                color: "white",
+                ml: "35rem",
+              }}
+            >
+              Agregar nuevo paciente
+            </Button>
           </div>
         </Box>
       </Modal>
