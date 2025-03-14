@@ -17,7 +17,7 @@ export const MySidebar = () => {
   };
 
   const handleNavigateToPublicacionesPage = () => {
-    navigate('/publicaciones');
+    navigate('/medication');
   };
 
   const handleNavigateToAddPublicacionPage = () => {
@@ -40,9 +40,9 @@ export const MySidebar = () => {
           onClickHandler={() => navigate('/')}
         />
         <NavButton
-          imgSrc="/assets/icons/publicaciones.png"
-          text="Publicaciones"
-          onClickHandler={handleNavigateToPublicacionesPage}
+          imgSrc="/assets/icons/dashboard.png"
+          text="Medicamentos"
+          onClickHandler={() => navigate('/medication')}
         />
         <NavButton
           imgSrc="/assets/icons/add.png"
