@@ -24,7 +24,15 @@ export default function ModalComponent() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Agregar Paciente</Button>
+      <Button
+        onClick={handleOpen}
+        sx={{
+          backgroundColor: "#2C3541",
+          color: "white",
+        }}
+      >
+        Agregar Paciente
+      </Button>
       <Modal
         keepMounted
         open={open}

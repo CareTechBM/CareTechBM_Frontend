@@ -1,28 +1,105 @@
-import { HeaderTable } from '../../components/molecules/HeaderTable'
-import { ColumnTable } from '../../components/molecules/ColumnTable'
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import { TablePaginationComponent } from "../../components/organisms/PaginationComponent";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#2c3541",
+    color: theme.palette.common.white,
+    fontFamily: "'Montserrat', sans-serif", // Agregar aquí
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 17,
+    fontFamily: "'Montserrat', sans-serif", // Agregar aquí
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
-    return (
-        <>
-            <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                <HeaderTable headers={['Nombre', 'Fecha de nacimiento', 'Sexo', 'Dirección', 'Teléfono', 'Email', 'Accion']} />
-                <tbody>
-                    {patient.map((item, index) => (
-                        <tr key={index} className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200' >
-                            <ColumnTable dato={item.name + ' ' + item.lastName} />
-                            <ColumnTable dato={item.birthdate} />
-                            <ColumnTable dato={item.sex} />
-                            <ColumnTable dato={item.address} />
-                            <ColumnTable dato={item.phone} />
-                            <ColumnTable dato={item.email} />
-                            <td className="grid grid-cols-1 p-2 gap-2">
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded" onClick={handleEdit} id={item._id}>Editar</button>
-                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded" onClick={handleDelete} id={item._id}>Eliminar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </>
-    )
-}
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Nombre</StyledTableCell>
+            <StyledTableCell>Fecha de nacimiento</StyledTableCell>
+            <StyledTableCell>Sexo</StyledTableCell>
+            <StyledTableCell>Dirección</StyledTableCell>
+            <StyledTableCell>Teléfono</StyledTableCell>
+            <StyledTableCell>Email</StyledTableCell>
+            <StyledTableCell>Acción</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {patient
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((item) => (
+              <StyledTableRow key={item._id}>
+                <StyledTableCell>{`${item.name} ${item.lastName}`}</StyledTableCell>
+                <StyledTableCell>{item.birthdate}</StyledTableCell>
+                <StyledTableCell>{item.sex}</StyledTableCell>
+                <StyledTableCell>{item.address}</StyledTableCell>
+                <StyledTableCell>{item.phone}</StyledTableCell>
+                <StyledTableCell>{item.email}</StyledTableCell>
+                <StyledTableCell>
+                  <div className="flex gap-x-[12px]">
+                    <button onClick={() => handleEdit(item._id)}>
+                      <ModeEditIcon
+                        fontSize="large"
+                        style={{ fontSize: 35, color: "#2C3541" }}
+                      />
+                    </button>
+                    <button onClick={() => handleDelete(item._id)}>
+                      <DeleteIcon
+                        fontSize="large"
+                        style={{ fontSize: 35, color: "#2C3541" }}
+                      />
+                    </button>
+                  </div>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+        </TableBody>
+      </Table>
+
+      {/* Componente de paginación */}
+      <TablePaginationComponent
+        count={patient.length}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </TableContainer>
+  );
+};
