@@ -16,21 +16,13 @@ const NavButton = ({ imgSrc, element, text, onClickHandler, extraClass }) => {
 
 export const MySidebar = () => {
   const navigate = useNavigate();
-
-  const toPatientPage = () => {
-    navigate('/patient');
-  };
-
-  const toMedicamentPage = () => {
-    navigate('/doctor');
-  };
-
-  const handleNavigateToAddPublicacionPage = () => {
-    navigate('/addpublicacion');
-  };
-
+  
   const handleLogout = () => {
     alert("Logout realizado");
+  };
+
+  const handleOpenModal = () => {
+    navigate("/modal");
   };
 
   return (
@@ -43,18 +35,18 @@ export const MySidebar = () => {
           extraClass={'justify-right items-center flex-row gap-2'}
           element={<FontAwesomeIcon size="xl" icon={faHospitalUser} style={{ color: "#21a393", }} />}
           text="Pacientes"
-          onClickHandler={toPatientPage}
+          onClickHandler={() => navigate("/patient")}
         />
         <NavButton
           extraClass={'justify-ritght items-center flex-row gap-2'}
           element={<FontAwesomeIcon size="xl" icon={faSuitcaseMedical} style={{ color: "#21a393", }} />}
           text="Medicamentos"
-          onClickHandler={toMedicamentPage}
+          onClickHandler={() => navigate("/medicament")}
         />
         <NavButton
           imgSrc={DoctorIcon}
           text="Doctores"
-          onClickHandler={toMedicamentPage}
+          onClickHandler={() => navigate("/doctor")}
         />
         <NavButton
           imgSrc="/assets/icons/settings.png"
@@ -68,7 +60,11 @@ export const MySidebar = () => {
         />
       </div>
       <div className="sidebar-profile">
-        <img src="https://via.placeholder.com/40" alt="Profile" className="profile-pic" />
+        <img
+          src="https://via.placeholder.com/40"
+          alt="Profile"
+          className="profile-pic"
+        />
         <div className="profile-details">
           <span>Emma Oliva</span>
           <span>em@gmail.com</span>
