@@ -13,7 +13,7 @@ export const MySidebar = () => {
   const navigate = useNavigate();
 
   const handleNavigateToSettingsPage = () => {
-    navigate('/settings');
+    navigate('/patient');
   };
 
   const handleNavigateToPublicacionesPage = () => {
@@ -36,8 +36,8 @@ export const MySidebar = () => {
       <div className="sidebar-buttons">
         <NavButton
           imgSrc="/assets/icons/dashboard.png"
-          text="Dashboard"
-          onClickHandler={() => navigate('/')}
+          text="Pacientes"
+          onClickHandler={() => navigate('/patient')}
         />
         <NavButton
           imgSrc="/assets/icons/publicaciones.png"

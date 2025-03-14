@@ -40,6 +40,5 @@ export const useLogin = () => {
         }
     }
 
-
     return {login, register, isLoading};
 }
