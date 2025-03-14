@@ -83,3 +83,81 @@ export const deletePatient = async (id)=>{
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const createDoctor = async (data)=>{
+    try {
+        return await apiClient.post('/doctor/', data);
+    } catch (e) {
+        return {
+            error:true,
+            e
+        }
+    }
+}
+
+export const getDoctor = async ()=>{
+    try {
+        return await apiClient.get('/doctor/');
+    } catch (e) {
+        return {
+            error:true,
+            e
+        }
+    }
+}
+
+export const updateDoctor = async (data)=>{
+    try {
+        return await apiClient.put(`/doctor/${data.id}`, data);
+    } catch (e) {
+        return {
+            error:true,
+            e
+        }
+    }
+}
+
+export const deleteDoctor = async (id)=>{
+    try {
+        return await apiClient.delete(`/doctor/${id}`);
+    } catch (e) {
+        return {
+            error:true,
+            e
+        }
+    }
+}   

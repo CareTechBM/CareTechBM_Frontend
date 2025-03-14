@@ -11,19 +11,16 @@ export const PatientPage = () => {
 
   useEffect(() => {
     getPatients();
-    
   }, []);
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    /*await deletePatient(e.target.id);*/
     getPatients();
   }
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    /*await updatePatient(e.target.id, 'Tilin','Insano','2005-10-10', 'Femenino', 'Av. 1', '12345678','hola@gmail.com');*/
-    /*await createPatient('Keny','Admin','2005-10-10', 'Macho', 'Av. 5', '12345678','keny@gmail.com');*/
+
     getPatients();
   }
 

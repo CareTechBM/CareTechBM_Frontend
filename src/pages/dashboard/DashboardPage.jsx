@@ -1,11 +1,14 @@
 import { MySidebar } from "../../components/organisms/Sidebar";
 import { PatientPage } from "../patient/PatientPage";
+import { DoctorPage } from "../doctor/DoctorPage";
 
 export const DashboardPage = ({ menu }) => {
   const viewMenu = () => {
     switch (menu) {
       case 'patient':
         return <PatientPage />;
+      case 'doctor':
+        return <DoctorPage />;
       default:
         return null;
     }

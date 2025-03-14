@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSuitcaseMedical } from '@fortawesome/free-solid-svg-icons';
+import { faHospitalUser } from "@fortawesome/free-solid-svg-icons";
+import DoctorIcon from "../../assets/User Medical.png";
 
-const NavButton = ({ imgSrc, text, onClickHandler }) => {
+
+const NavButton = ({ imgSrc, element, text, onClickHandler, extraClass }) => {
   return (
-    <div className="sidebar-button" onClick={onClickHandler}>
-      <img src={imgSrc} alt={`${text} icon`} className="icon-image" />
+    <div className={"sidebar-button " + extraClass} onClick={onClickHandler}>
+      {imgSrc ? <img  src={imgSrc} alt={`${text} icon`} className="icon-image" /> : element}
       <span>{text}</span>
     </div>
   );
@@ -12,12 +17,12 @@ const NavButton = ({ imgSrc, text, onClickHandler }) => {
 export const MySidebar = () => {
   const navigate = useNavigate();
 
-  const handleNavigateToSettingsPage = () => {
+  const toPatientPage = () => {
     navigate('/patient');
   };
 
-  const handleNavigateToPublicacionesPage = () => {
-    navigate('/publicaciones');
+  const toMedicamentPage = () => {
+    navigate('/doctor');
   };
 
   const handleNavigateToAddPublicacionPage = () => {
@@ -35,24 +40,26 @@ export const MySidebar = () => {
       </div>
       <div className="sidebar-buttons">
         <NavButton
-          imgSrc="/assets/icons/dashboard.png"
+          extraClass={'justify-right items-center flex-row gap-2'}
+          element={<FontAwesomeIcon size="xl" icon={faHospitalUser} style={{ color: "#21a393", }} />}
           text="Pacientes"
-          onClickHandler={() => navigate('/patient')}
+          onClickHandler={toPatientPage}
         />
         <NavButton
-          imgSrc="/assets/icons/publicaciones.png"
-          text="Publicaciones"
-          onClickHandler={handleNavigateToPublicacionesPage}
+          extraClass={'justify-ritght items-center flex-row gap-2'}
+          element={<FontAwesomeIcon size="xl" icon={faSuitcaseMedical} style={{ color: "#21a393", }} />}
+          text="Medicamentos"
+          onClickHandler={toMedicamentPage}
         />
         <NavButton
-          imgSrc="/assets/icons/add.png"
-          text="Agregar Publicación"
-          onClickHandler={handleNavigateToAddPublicacionPage}
+          imgSrc={DoctorIcon}
+          text="Doctores"
+          onClickHandler={toMedicamentPage}
         />
         <NavButton
           imgSrc="/assets/icons/settings.png"
           text="My Account"
-          onClickHandler={handleNavigateToSettingsPage}
+          onClickHandler={() => { }}
         />
         <NavButton
           imgSrc="/assets/icons/logout.png"
