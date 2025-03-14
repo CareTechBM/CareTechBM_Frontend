@@ -5,7 +5,7 @@ export const TableMedication = ({ medication }) => {
     return (
         <>
             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                <HeaderTable headers={['Nombre', 'Descripcion', 'price', 'Currency', 'Fecha Vencimiento', 'Stock']} />
+                <HeaderTable headers={['Nombre', 'Descripcion', 'price', 'Currency', 'Fecha Vencimiento', 'Stock', 'Accion']} />
                 <tbody>
                     {medication.map((item, index) => (
                         <tr key={index} className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200' >

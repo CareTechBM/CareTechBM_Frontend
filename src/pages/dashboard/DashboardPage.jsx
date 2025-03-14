@@ -1,25 +1,29 @@
 import { MySidebar } from "../../components/organisms/Sidebar";
-import MedicationPage from "../medication/MedicationPage";
+import { PatientPage } from "../patient/PatientPage";
+import {MedicationPage} from "../medication/MedicationPage";
 
-export const DashboardPage = () => {
-  
+export const DashboardPage = ({ menu }) => {
   const viewMenu = () => {
     switch (menu) {
+      case 'patient':
+        return <PatientPage />;
       case 'medication':
         return <MedicationPage />;
       default:
         return null;
     }
   }
-  
+
   return (
     <div className="flex flex-row">
       {/* Sidebar fijo */}
       <MySidebar />
 
+
       {/* Contenido principal */}
       <div className="flex-grow-1 h-full">
         {viewMenu()}
+
       </div>
     </div>
   );

@@ -12,22 +12,6 @@ const NavButton = ({ imgSrc, text, onClickHandler }) => {
 export const MySidebar = () => {
   const navigate = useNavigate();
 
-  const handleNavigateToSettingsPage = () => {
-    navigate('/settings');
-  };
-
-  const handleNavigateToPublicacionesPage = () => {
-    navigate('/medication');
-  };
-
-  const handleNavigateToAddPublicacionPage = () => {
-    navigate('/addpublicacion');
-  };
-
-  const handleLogout = () => {
-    alert("Logout realizado");
-  };
-
   return (
     <div className="sidebar-container">
       <div className="sidebar-logo">
@@ -36,28 +20,13 @@ export const MySidebar = () => {
       <div className="sidebar-buttons">
         <NavButton
           imgSrc="/assets/icons/dashboard.png"
-          text="Dashboard"
-          onClickHandler={() => navigate('/')}
+          text="Pacientes"
+          onClickHandler={() => navigate('/patient')}
         />
         <NavButton
-          imgSrc="/assets/icons/dashboard.png"
+          imgSrc="/assets/icons/publicaciones.png"
           text="Medicamentos"
           onClickHandler={() => navigate('/medication')}
-        />
-        <NavButton
-          imgSrc="/assets/icons/add.png"
-          text="Agregar Publicación"
-          onClickHandler={handleNavigateToAddPublicacionPage}
-        />
-        <NavButton
-          imgSrc="/assets/icons/settings.png"
-          text="My Account"
-          onClickHandler={handleNavigateToSettingsPage}
-        />
-        <NavButton
-          imgSrc="/assets/icons/logout.png"
-          text="Logout"
-          onClickHandler={handleLogout}
         />
       </div>
       <div className="sidebar-profile">
