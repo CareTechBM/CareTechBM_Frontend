@@ -34,8 +34,13 @@ export const MySidebar = () => {
   return (
     <div className="bg-[#E6ECED] min-h-screen flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
       <div className=" filter:drop-shadow-xl sidebar-logo bg-[#2C3541] flex flex-col items-center justify-center">
-        <img src={CareTechLogo} alt="Logo" className="w-2/6" />
-        <h2 className="text-white">Care Tech</h2>
+        <a
+          href="/principal"
+          className="flex flex-col items-center justify-center"
+        >
+          <img src={CareTechLogo} alt="Logo" className="w-2/6" />
+          <h2 className="text-white">Care Tech</h2>
+        </a>
       </div>
       <div className="sidebar-buttons">
         <NavButton

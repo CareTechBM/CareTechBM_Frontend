@@ -66,6 +66,7 @@ export default function ModalComponent() {
           </Typography>
           <br />
 
+          {/*Formulario Pacientes */}
           <FormPatient />
 
           <div className="w-[100%]">
@@ -79,11 +80,10 @@ export default function ModalComponent() {
               Cancelar
             </Button>{" "}
             <Button
-              onClick={""}
               sx={{
                 backgroundColor: "#2C3541",
                 color: "white",
-                ml: "35rem",
+                ml: "62%",
               }}
             >
               Agregar nuevo paciente
