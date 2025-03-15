@@ -18,12 +18,12 @@ export const DashboardPage = ({ menu }) => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row  h-full min-h-full">
       {/* Sidebar fijo */}
       <MySidebar/>
 
       {/* Contenido principal */}
-      <div className="flex-grow-1 h-full">{viewMenu()}</div>
+      <div className="w-full overflow-y-auto">{viewMenu()}</div>
     </div>
   );
 };

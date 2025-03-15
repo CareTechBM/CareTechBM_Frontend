@@ -26,17 +26,16 @@ export const usePatient = () => {
         }
     }
 
-    const getPatient = async () => {
+    const getPatient = async (page, pageSize) => {
         setIsLoading(true);
-        const response = await getPatientRequest();
-
+        const response = await getPatientRequest(page,pageSize);
         if (response.error) {
-            toast.error(response.e?.response.data || 'Error al obtener pacientes');
+            toast.error(response.e?.response?.data || 'Error al obtener pacientes');
             setIsLoading(false);
             return ;
         }else{
             toast.success('Pacientes obtenidos exitosamente');
-            setPatient(response.data);
+            setPatient(response.data.patient);
             setIsLoading(false);
             return response.data;
         }

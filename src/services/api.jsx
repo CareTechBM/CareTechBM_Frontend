@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',
+    /*baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',*/
+    baseURL: 'http://localhost:8081/caretech/v1/',
     timeout: 5000
 })
 
@@ -29,9 +30,9 @@ export const login =async (data)=>{
     }
 }
 
-export const register =async (data)=>{
+export const register =async (page, pageSize)=>{
     try {
-        return await apiClient.post('/auth/register', data);
+        return await apiClient.post('/auth/register', { page, pageSize });
     } catch (e) {
         return {
             error:true,
@@ -41,6 +42,7 @@ export const register =async (data)=>{
 }
 
 export const createPatient = async (data)=>{
+    console.log(data);
     try {
         return await apiClient.post('/patient/create', data);
     } catch (e) {
@@ -51,9 +53,9 @@ export const createPatient = async (data)=>{
     }
 }
 
-export const getPatient= async ()=>{
+export const getPatient= async (data)=>{
     try {
-        return await apiClient.get('/patient/');
+        return await apiClient.get('/patient/', {params:data});
     } catch (e) {
         return {
             error:true,

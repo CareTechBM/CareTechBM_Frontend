@@ -8,7 +8,7 @@ export const App = () => {
   let element = useRoutes(routes);
 
   return (
-    <div className="bg-[#2c3541] h-svh">
+    <div className="bg-[#2c3541]">
       {element}
       <Toaster position="top-right" reverseOrder={false} />
     </div>

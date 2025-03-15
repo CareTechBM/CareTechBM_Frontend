@@ -32,12 +32,12 @@ export const MySidebar = () => {
   };
 
   return (
-    <div className="bg-[#E6ECED] min-h-screen flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
-      <div className=" filter:drop-shadow-xl sidebar-logo bg-[#2C3541] flex flex-col items-center justify-center">
+    <div className="bg-[#E6ECED] flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
+      <div className="sidebar-logo bg-[#2C3541] flex flex-col items-center justify-center">
         <img src={CareTechLogo} alt="Logo" className="w-2/6" />
         <h2 className="text-white">Care Tech</h2>
       </div>
-      <div className="sidebar-buttons">
+      <div className="flex flex-col gap-y-4 justify-center m-2">
         <NavButton
           extraClass={"justify-right items-center flex-row gap-2"}
           element={
@@ -80,13 +80,13 @@ export const MySidebar = () => {
           onClickHandler={() => {}}
         />
       </div>
-      <div className="sidebar-profile">
+      <div className="flex flex-col justify-center items-center md:flex-row md:gap-x-3 bottom-0 mt-auto border-t-1 border-gray-400 w-full p-3">
         <img
           src="https://via.placeholder.com/40"
           alt="Profile"
           className="profile-pic"
         />
-        <div className="profile-details">
+        <div className="flex flex-col">
           <span>Emma Oliva</span>
           <span>em@gmail.com</span>
         </div>

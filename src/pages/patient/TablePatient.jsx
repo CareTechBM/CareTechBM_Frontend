@@ -8,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import { TablePaginationComponent } from "../../components/organisms/PaginationComponent";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -34,21 +33,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: 700, minHeight: 500 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Nombre</StyledTableCell>
@@ -61,9 +48,7 @@ export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {patient
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((item) => (
+          {patient.map((item) => (
               <StyledTableRow key={item._id}>
                 <StyledTableCell>{`${item.name} ${item.lastName}`}</StyledTableCell>
                 <StyledTableCell>{item.birthdate}</StyledTableCell>
@@ -91,15 +76,6 @@ export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
             ))}
         </TableBody>
       </Table>
-
-      {/* Componente de paginación */}
-      <TablePaginationComponent
-        count={patient.length}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </TableContainer>
   );
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import TablePagination from "@mui/material/TablePagination";
 
 export const TablePaginationComponent = ({
@@ -6,10 +5,11 @@ export const TablePaginationComponent = ({
   page,
   rowsPerPage,
   onPageChange,
-  onRowsPerPageChange,
+  onRowsPerPageChange
 }) => {
   return (
     <TablePagination
+      sx={{minHeight: '50px'}}
       component="div"
       count={count}
       page={page}
