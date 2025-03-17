@@ -13,12 +13,10 @@ export const FormPatient = () => {
   const { formPatient, handleValueChange, handleInputBlur } = useContext(PatientContext);
   const [selectedSex, setSelectedSex] = useState(0);
   const [stateBirthdate, setStateBirthdate] = useState(dayjs('1990-01-01'));
-  const [stateRegistration, setStateRegistration] = useState(dayjs('1990-01-01'));
 
   const handleSexChange = (event) => {// Actualiza el estado con el valor seleccionado
     setSelectedSex(event.target.value);
-    formPatient.sex.value = event.target.value; // Actualiza el estado con el valor seleccionado
-    handleValueChange(formPatient.sex.field, event.target.value);
+    handleValueChange( formPatient.sex.field, event.target.value);
   };
 
   return (
@@ -65,11 +63,14 @@ export const FormPatient = () => {
           />
 
           <TextField
-            id="select-sex"
+            id={formPatient.sex.field}
             label="Sexo"
-            value={formPatient.sex.value == '' ? selectedSex : formPatient.sex.value} // Usa el estado como valor
+            value={selectedSex} // Usa el estado como valor
             onChange={handleSexChange} // Manejador de cambio
-            onBlur={(e) => handleInputBlur(formPatient.sex.field, e.target.value)}
+            onBlur={(e) => {handleInputBlur(formPatient.sex.field, e.target.value)
+              const v = document.getElementById(formPatient.sex.field);
+              formPatient.sex.value= v.innerHTML;
+            }} // Manejador de blur
             select
             error={!formPatient.sex.isValid}
             helperText={!formPatient.sex.isValid ? "El sexo es obligatorio" : null}
@@ -110,35 +111,6 @@ export const FormPatient = () => {
             error={!formPatient.email.isValid}
             helperText={!formPatient.email.isValid ? "El correo electronico es obligatorio" : null}
             variant="outlined"
-          />
-
-          <DatePicker
-            format="DD/MM/YYYY"
-            id={formPatient.registrationDate.field}
-            label="Fecha de registro"
-            value={formPatient.registrationDate.value || stateRegistration}
-            defaultValue={stateRegistration}
-            onChange={(newValue) => {
-              setStateRegistration(newValue);
-              handleValueChange(formPatient.registrationDate.field, newValue);
-            }}
-            slotProps={{
-              textField: {
-                helperText: !formPatient.registrationDate.isValid ? "La fecha de registro es obligatoria" : null,
-                error: !formPatient.registrationDate.isValid
-              }
-            }}
-          />
-
-          <TextField
-            id={formPatient.record.field}
-            label="Registro"
-            value={formPatient.record.value}
-            onChange={(e) => handleValueChange(formPatient.record.field, e.target.value)}
-            onBlur={(e) => handleInputBlur(formPatient.record.field, e.target.value)}
-            error={!formPatient.record.isValid}
-            helperText={!formPatient.record.isValid ? "El registro es obligatorio" : null}
-            type="number"
           />
         </div>
       </div>

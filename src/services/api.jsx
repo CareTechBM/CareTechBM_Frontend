@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',
-    /*baseURL: 'http://localhost:8080/caretech/v1/',*/
+    /*baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',*/
+    baseURL: 'http://localhost:8080/caretech/v1/',
     timeout: 5000
 })
 

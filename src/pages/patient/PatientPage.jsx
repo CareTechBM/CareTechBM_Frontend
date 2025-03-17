@@ -7,6 +7,7 @@ import { TablePaginationComponent } from "../../components/organisms/PaginationC
 import { PatientContext } from "../../shared/context/PatientContext";
 import { FormPatient } from './FormPatient'
 import {ModalContext} from "../../shared/context/ModalContext";
+import dayjs from "dayjs";
 
 export const PatientPage = () => {
   const {
@@ -51,18 +52,16 @@ export const PatientPage = () => {
     handleClose();
   }
 
-
   const savePatient = async (e) => {
     e.preventDefault();
     await createPatient(
-       formPatient.name.value,
-       formPatient.lastName.value,
-       formPatient.sex.value,
-       new Date(formPatient.birthdate.value),
-       formPatient.address.value,
-       formPatient.phone.value,
-       formPatient.email.value,
-       new Date(formPatient.registrationDate.value)
+      formPatient.name.value,
+      formPatient.lastName.value,
+      dayjs(formPatient.birthdate.value).format("YYYY-MM-DD"),
+      formPatient.sex.value,
+      formPatient.address.value,
+      formPatient.phone.value,
+      formPatient.email.value,
     );
     resetForm();
     handleClose();

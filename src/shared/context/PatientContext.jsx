@@ -39,16 +39,6 @@ function PatientProvider({ children }) {
             field: "email",
             value: "",
             isValid: true,
-        },
-        registrationDate: {
-            field: "registrationDate",
-            value: "",
-            isValid: true,
-        },
-        record: {
-            field: "record",
-            value: "",
-            isValid: true,
         }
     });
     const [edit, setEdit] = useState(false);
@@ -75,24 +65,7 @@ function PatientProvider({ children }) {
             case "email":
                 isValid = value.length > 0;
                 break;
-            case "record":
-                isValid = value.length > 0;
-                if (parseInt(value) < 1) isValid = false;
-                break;
             case "birthdate":
-                try {
-                    isValid = true;
-                    if (value.$d == 'Invalid Date' || value == null) {
-                        isValid = false;
-                    }
-                    /*if((new Date().getFullYear()-value.$d.getFullYear())>125){
-                        isValid = false;
-                    }*/
-                } catch (error) {
-                    isValid = false;
-                }
-                break;
-            case "registrationDate":
                 try {
                     isValid = true;
                     if (value.$d == 'Invalid Date' || value == null) {
@@ -170,16 +143,6 @@ function PatientProvider({ children }) {
                 field: "email",
                 value: "",
                 isValid: true,
-            },
-            registrationDate: {
-                field: "registrationDate",
-                value: "",
-                isValid: true,
-            },
-            record: {
-                field: "record",
-                value: "",
-                isValid: true,
             }
         });
     }
@@ -198,9 +161,8 @@ function PatientProvider({ children }) {
         !formPatient.sex.isValid ||
         !formPatient.address.isValid ||
         !formPatient.phone.isValid ||
-        !formPatient.email.isValid ||
-        !formPatient.registrationDate.isValid ||
-        !formPatient.record.isValid || valueIsNull(formPatient);
+        !formPatient.email.isValid
+        valueIsNull(formPatient);
 
 
     return (
