@@ -9,14 +9,13 @@ export const TablePaginationComponent = ({
 }) => {
   return (
     <TablePagination
-      sx={{minHeight: '50px'}}
+      sx={{ minHeight: '50px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left' }}
       component="div"
       count={count}
       page={page}
-      rowsPerPage={rowsPerPage}
       onPageChange={onPageChange}
+      rowsPerPage={rowsPerPage}
       onRowsPerPageChange={onRowsPerPageChange}
-      rowsPerPageOptions={[5, 10, 25]}
     />
   );
 };

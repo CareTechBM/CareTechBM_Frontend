@@ -34,8 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export const TablePatient = ({ patient, handleDelete, handleEdit }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700, minHeight: 500 }} aria-label="customized table">
+    <TableContainer>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Nombre</StyledTableCell>

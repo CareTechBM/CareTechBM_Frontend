@@ -1,10 +1,12 @@
-import { useEffect } from "react";
 import { usePatient } from "../../shared/hooks/usePatient";
 import { TablePatient } from "./TablePatient";
-import { Typography } from "@mui/material";
+import {useContext, useEffect} from "react";
 import ModalComponent from "../../components/organisms/ModalComponent";
 import { useState } from "react";
 import { TablePaginationComponent } from "../../components/organisms/PaginationComponent";
+import { PatientContext } from "../../shared/context/PatientContext";
+import { FormPatient } from './FormPatient'
+import {ModalContext} from "../../shared/context/ModalContext";
 
 export const PatientPage = () => {
   const {
@@ -19,9 +21,11 @@ export const PatientPage = () => {
   const [pageSize, setPageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const [totalPatients, setTotalPatients] = useState(0);
+  const { active, handleActive, handleClose} = useContext(ModalContext);
+  const {formPatient, resetForm,errorForm} = useContext(PatientContext);
 
   const getPatients = async () => {
-    const response = await getPatient({ page , pageSize });
+    const response = await getPatient({ page: page+1, pageSize });
     setPageSize(response.pageSize);
     setTotalPages(response.totalPages);
     setTotalPatients(response.totalPatients);
@@ -29,50 +33,52 @@ export const PatientPage = () => {
 
   useEffect(() => {
     getPatients();
-  }, [pageSize , page]);
+  }, [pageSize, page]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
     getPatients();
   };
 
-  const handleEdit = async (e) => {
+  const handleEdit = (e) => {
     e.preventDefault();
     getPatients();
   };
 
-  const handleChangePage =async (e, newPage) => {
+
+  const closeForm = (e) => {
+    resetForm();
+    handleClose();
+  }
+
+
+  const savePatient = async (e) => {
     e.preventDefault();
-    setPage(newPage);
+    await createPatient(
+       formPatient.name.value,
+       formPatient.lastName.value,
+       formPatient.sex.value,
+       new Date(formPatient.birthdate.value),
+       formPatient.address.value,
+       formPatient.phone.value,
+       formPatient.email.value,
+       new Date(formPatient.registrationDate.value)
+    );
+    resetForm();
+    handleClose();
+    getPatients();
   };
-
-  const handleChangeRowsPerPage = async (e) => {
-    e.preventDefault();
-    setPageSize(e.target.value, page);
-    setPage(0);
-  };
-
-
+  
   return (
     <>
-      <div className="flex flex-col bg-white h-full">
-        <div className="overflow-x-auto m-2">
+      <div className="flex flex-col bg-white h-screen max-h-full overflow-x-auto">
           <div className="flex flex-col gap-2 items-right md:items-center md:flex-row md:gap-[2rem] m-2">
-            <Typography
-              variant="h1"
-              sx={{
-                fontSize: "4.5rem",
-                color: "#21A393",
-                fontFamily: "'Montserrat', sans-serif",
-              }}
-            >
-              Pacientes
-            </Typography>
-            <div className="">
-              <ModalComponent />
-            </div>
+            <h1 className="text-3xl sm:text-5xl font-bold text-[#21A393]">Pacientes</h1>
+            <ModalComponent titleForm="Agregar Paciente" optionButton="GUARDAR" textButtonModal="Agregar Paciente" 
+            formView={<FormPatient /> } handleActive={handleActive} active={active} close={closeForm} action={savePatient}
+              actionError={errorForm}/>
           </div>
-          <div className="flex flex-col items-start max-h-screen">
+          <div className="m-2 overflow-y-auto">
             {Array.isArray(patient) ? (
               <TablePatient
                 patient={patient}
@@ -81,17 +87,14 @@ export const PatientPage = () => {
               />
             ) : null}
           </div>
-          <div className="flex flex-col items-start">
-            {Array.isArray(patient) && totalPages > 0 && (<TablePaginationComponent
-              count={totalPatients}
-              page={page} 
-              rowsPerPage={pageSize}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />)
-            }
-          </div>
-        </div>
+          {Array.isArray(patient) && totalPages > 0 && (<TablePaginationComponent
+            count={totalPatients}
+            page={page}
+            rowsPerPage={pageSize}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            onRowsPerPageChange={(e) => setPageSize(e.target.value, 10)}
+          />)
+          }
       </div>
     </>
   );

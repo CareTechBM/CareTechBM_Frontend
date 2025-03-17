@@ -32,7 +32,7 @@ export const MySidebar = () => {
   };
 
   return (
-    <div className="bg-[#E6ECED] flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
+    <div className="bg-[#E6ECED] min-h-[500px] flex flex-col w-[55%] min-w-[195px] max-w-[20%]">
       <div className="sidebar-logo bg-[#2C3541] flex flex-col items-center justify-center">
         <img src={CareTechLogo} alt="Logo" className="w-2/6" />
         <h2 className="text-white">Care Tech</h2>

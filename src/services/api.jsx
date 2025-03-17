@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    /*baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',*/
-    baseURL: 'http://localhost:8081/caretech/v1/',
+    baseURL: 'https://care-tech-bm-backend.vercel.app/caretech/v1/',
+    /*baseURL: 'http://localhost:8080/caretech/v1/',*/
     timeout: 5000
 })
 
@@ -10,7 +10,7 @@ apiClient.interceptors.request.use(
     config => {
         const token = localStorage.getItem('token');
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = token;
         }
         return config;
     },

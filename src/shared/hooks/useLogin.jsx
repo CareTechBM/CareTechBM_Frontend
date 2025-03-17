@@ -2,7 +2,6 @@ import { login as loginRequest, register as registerRequest } from '../../servic
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { use } from 'react';
 
 export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -13,11 +12,11 @@ export const useLogin = () => {
         const response = await loginRequest({ email, password });
 
         if (response.error) {
-            toast.error(response.e?.response.data || 'Error al iniciar sesion');
+            toast.error(response.e?.response.data.msg || 'Error al iniciar sesion');
             setIsLoading(false);
             return;
         } else {
-            localStorage.setItem('token', response.data.userDetails.token);
+            localStorage.setItem('token', 'Bearer '+response.data.userDetails.token);
             toast.success(response.data.msg || 'Inicio de sesion exitoso');
             setIsLoading(false);
             navigate('/principal');
