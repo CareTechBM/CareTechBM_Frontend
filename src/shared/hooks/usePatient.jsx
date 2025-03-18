@@ -1,7 +1,8 @@
 import { createPatient as createPatientRequest,
     getPatient as getPatientRequest,
     updatePatient as updatePatientRequest,
-    deletePatient as deletePatientRequest
+    deletePatient as deletePatientRequest,
+    findPatientById as findPatientByIdRequest
 } from '../../services/api.jsx';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -41,6 +42,21 @@ export const usePatient = () => {
         }
     }
 
+    const findPatientById = async (id) => {
+        setIsLoading(true);
+        const response = await findPatientByIdRequest(id);
+
+        if (response.error) {
+            toast.error(response.e?.response.data || 'Error al obtener paciente');
+            setIsLoading(false);
+            return ;
+        }else{
+            toast.success('Paciente obtenido exitosamente');
+            setPatient(response.data);
+            setIsLoading(false);
+            return response.data
+        }
+    }
     const updatePatient = async (id, name, lastName, birthdate, sex, address, phone, email) => {
         setIsLoading(true);
         const response = await updatePatientRequest({id, name, lastName, birthdate, sex, address, phone, email });
@@ -59,7 +75,6 @@ export const usePatient = () => {
     const deletePatient =  async (id) => {
         setIsLoading(true);
         const response = await deletePatientRequest(id);
-
         if (response.error) {
             toast.error(response.e?.response.data || 'Error al eliminar paciente');
             setIsLoading(false);
@@ -71,5 +86,5 @@ export const usePatient = () => {
         }
     }
 
-    return{createPatient, getPatient, updatePatient, deletePatient, patient, isLoading};
+    return{createPatient, getPatient, updatePatient, findPatientById, deletePatient, patient, isLoading};
 }

@@ -10,7 +10,7 @@ export const App = () => {
   return (
     <div className="bg-[#2c3541]">
       {element}
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} toastOptions={{ id: "clipboard" }} />
     </div>
   );
 };

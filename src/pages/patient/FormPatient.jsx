@@ -6,22 +6,34 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MenuItem } from "@mui/material";
 import { useContext } from "react";
 import { PatientContext } from "../../shared/context/PatientContext";
-import dayjs from "dayjs";
 
 export const FormPatient = () => {
   //OBTENEMOS LOS DATOS DEL CONTEXT DE PACIENTE
   const { formPatient, handleValueChange, handleInputBlur } = useContext(PatientContext);
   const [selectedSex, setSelectedSex] = useState(0);
-  const [stateBirthdate, setStateBirthdate] = useState(dayjs('1990-01-01'));
+  const [stateBirthdate, setStateBirthdate] = useState(null);
 
-  const handleSexChange = (event) => {// Actualiza el estado con el valor seleccionado
+
+  const handleSexChange = (event, item) => {// Actualiza el estado con el valor seleccionado
     setSelectedSex(event.target.value);
-    handleValueChange( formPatient.sex.field, event.target.value);
+    handleValueChange(formPatient.sex.field, item.props.children);
   };
+  
+  const handleBirthdateChange = (newValue) => {
+    setStateBirthdate(newValue);
+    handleValueChange(formPatient.birthdate.field, newValue);
+    setStateBirthdate(null);
+  }
+
+  const options = [
+    { value: 0, label: "Seleccionar" },
+    { value: 1, label: "Masculino" },
+    { value: 2, label: "Femenino" }
+  ]
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="">
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3">
           <TextField
             id={formPatient.name.field}
@@ -29,7 +41,6 @@ export const FormPatient = () => {
             value={formPatient.name.value}
             variant="outlined"
             onChange={(e) => handleValueChange(formPatient.name.field, e.target.value)}
-            onBlur={(e) => handleInputBlur(formPatient.name.field, e.target.value)}
             error={!formPatient.name.isValid}
             helperText={!formPatient.name.isValid ? "Los nombres son obligatorios" : null}
           />
@@ -50,10 +61,8 @@ export const FormPatient = () => {
             label="Fecha de nacimiento"
             value={formPatient.birthdate.value || stateBirthdate}
             defaultValue={stateBirthdate}
-            onChange={(newValue) => {
-              setStateBirthdate(newValue);
-              handleValueChange(formPatient.birthdate.field, newValue);
-            }}
+            onChange={(newValue) => handleBirthdateChange(newValue)}
+            onBlur={(newValue) => handleInputBlur(formPatient.birthdate.field, newValue)}
             slotProps={{
               textField: {
                 helperText: !formPatient.birthdate.isValid ? "La fecha de nacimiento es obligatoria" : null,
@@ -65,19 +74,20 @@ export const FormPatient = () => {
           <TextField
             id={formPatient.sex.field}
             label="Sexo"
+            name="sex"
+            defaultValue={formPatient.sex.value} // Valor por defecto
+            defaultChecked={0} // Valor por defecto
             value={selectedSex} // Usa el estado como valor
-            onChange={handleSexChange} // Manejador de cambio
-            onBlur={(e) => {handleInputBlur(formPatient.sex.field, e.target.value)
-              const v = document.getElementById(formPatient.sex.field);
-              formPatient.sex.value= v.innerHTML;
-            }} // Manejador de blur
-            select
+            onChange={(e, item) => { handleSexChange(e, item) }} // Actualiza el estado con el valor seleccionado
             error={!formPatient.sex.isValid}
             helperText={!formPatient.sex.isValid ? "El sexo es obligatorio" : null}
+            select
           >
-            <MenuItem value="0">Seleccionar</MenuItem>
-            <MenuItem value="1">Masculino</MenuItem>
-            <MenuItem value="2">Femenino</MenuItem>
+            {options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
           </TextField>
 
           <TextField
@@ -113,7 +123,7 @@ export const FormPatient = () => {
             variant="outlined"
           />
         </div>
-      </div>
+
     </LocalizationProvider>
   );
 };

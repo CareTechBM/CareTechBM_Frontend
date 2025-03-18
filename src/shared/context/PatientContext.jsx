@@ -42,6 +42,7 @@ function PatientProvider({ children }) {
         }
     });
     const [edit, setEdit] = useState(false);
+    const [idPatient, setIdPatient] = useState("");
 
     const validateForm = (field, value) => {
         let isValid = false;
@@ -53,8 +54,11 @@ function PatientProvider({ children }) {
                 isValid = value.length > 0;
                 break;
             case "sex":
-                isValid = value.length > 0;
-                if(parseInt(value) < 1) isValid = false;
+                if(value=='Seleccionar'){
+                    isValid = false;
+                }else{
+                    isValid = true;
+                }
                 break;
             case "address":
                 isValid = value.length > 0;
@@ -68,7 +72,7 @@ function PatientProvider({ children }) {
             case "birthdate":
                 try {
                     isValid = true;
-                    if (value.$d == 'Invalid Date' || value == null) {
+                    if (value.$d == 'Invalid Date' || value === null || value =='') {
                         isValid = false;
                     }
                     /*if((new Date().getFullYear()-value.$d.getFullYear())>125){
@@ -83,6 +87,7 @@ function PatientProvider({ children }) {
         }
         return isValid;
     }
+
 
     const handleValueChange = (field, value) => {
         setFormPatient({
@@ -154,20 +159,20 @@ function PatientProvider({ children }) {
             }
         }
     }
-
+    
     const errorForm = !formPatient.name.isValid ||
         !formPatient.lastName.isValid ||
         !formPatient.birthdate.isValid ||
         !formPatient.sex.isValid ||
         !formPatient.address.isValid ||
         !formPatient.phone.isValid ||
-        !formPatient.email.isValid
+        !formPatient.email.isValid ||
         valueIsNull(formPatient);
 
 
     return (
         <PatientContext.Provider value={{
-            setFormPatient, errorForm, formPatient,
+            setFormPatient, errorForm, formPatient, idPatient, setIdPatient,
             resetForm, handleValueChange, handleInputBlur, edit, setEdit
         }}>
             {children}
